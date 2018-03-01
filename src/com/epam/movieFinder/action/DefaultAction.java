@@ -2,16 +2,15 @@ package com.epam.movieFinder.action;
 
 import java.util.List;
 
-import com.epam.movieFinder.cache.MovieStorageStackedStateCache;
 import com.epam.movieFinder.internalException.InternalException;
+import com.epam.movieFinder.storage.MovieStorage;
 
 public abstract class DefaultAction{
+	protected MovieStorage movieStorage;
 
-	protected MovieStorageStackedStateCache storage;
-
-	public DefaultAction(MovieStorageStackedStateCache storage) {
+	public DefaultAction(MovieStorage movieStorage) {
 		super();
-		this.storage = storage;
+		this.movieStorage = movieStorage;
 	}
 	
 	public abstract void execute(List<String> args) throws InternalException;

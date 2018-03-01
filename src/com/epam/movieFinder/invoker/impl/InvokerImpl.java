@@ -11,17 +11,16 @@ import com.epam.movieFinder.invoker.Invoker;
 
 public class InvokerImpl implements Invoker {
 	private Map<String, DefaultAction> handledActions;
-	
+
 	public InvokerImpl(Map<String, DefaultAction> handledActions) {
 		this.handledActions = handledActions;
 	}
-
 	@Override
 	public Response executeAction(ActionEnum action, List<String> args) {
 		try {
 			if(action == null)
 			{
-				throw new InternalException("Invalid input");
+				throw new InternalException("Unknown command");
 			}
 			handledActions.get(action.getName()).execute(args);
 			return new Response(null, false, null);

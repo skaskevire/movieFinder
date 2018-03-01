@@ -15,28 +15,26 @@ import com.epam.movieFinder.action.FilterByYearOfProduction;
 import com.epam.movieFinder.action.Reset;
 import com.epam.movieFinder.action.ShowMovieCount;
 import com.epam.movieFinder.action.ShowTitles;
-import com.epam.movieFinder.cache.MovieStorageStackedStateCache;
 import com.epam.movieFinder.invoker.Invoker;
 import com.epam.movieFinder.invoker.impl.InvokerImpl;
+import com.epam.movieFinder.storage.MovieStorage;
 import com.epam.movieFinder.util.ActionParser;
 
 public class Launcher {
-	
+	private boolean running = true;
+	private Map<String, DefaultAction> handledActions;
 
-	public static void main(String[] args) {
-		if(args.length == 0)
-		{
-			System.out.println("You must specify path to file with movies");
-			return;
-		}
-		MovieStorageStackedStateCache operator = new MovieStorageStackedStateCache();
 
-		Invoker invoker = new InvokerImpl(initSystemActions(operator));
+	public void run(String moviePath)
+	{
+		MovieStorage operator = new MovieStorage();
+
+		Invoker invoker = new InvokerImpl(initSystemActions(operator, this));
 		
 		ActionParser actionParser = new ActionParser();
 		
 		Response resp = null;
-		resp = invoker.executeAction(ActionEnum.getByName("extract"), Arrays.asList(args[0]));
+		resp = invoker.executeAction(ActionEnum.getByName("extract"), Arrays.asList(moviePath));
 		if(resp.isContainsError())
 		{
 			System.out.println(resp.getErrorMessage());
@@ -53,25 +51,37 @@ public class Launcher {
 			{
 				System.out.println(response.getErrorMessage());
 			}
-		} while(operator.isRunning());
+		} while(running);
 		
 		scanner.close();
-
 	}
 	
-	
-	private static Map<String, DefaultAction> initSystemActions(MovieStorageStackedStateCache operator)
+	private static Map<String, DefaultAction> initSystemActions(MovieStorage operator, Launcher launcher)
 	{
 		Map<String, DefaultAction> actions = new HashMap<>();
 		actions.put("extract", new ExtractMovies(operator));
 		actions.put("FilterByRatingBetterThan", new FilterByRatingBetterThan(operator));
 		actions.put("FilterByYearOfProduction", new FilterByYearOfProduction(operator));
 		actions.put("FilterByRatingCountMoreThan", new FilterByRatingCountMoreThan(operator));
-		actions.put("exit", new Exit(operator));
+		actions.put("exit", new Exit(operator, launcher));
 		actions.put("ShowMovieCount", new ShowMovieCount(operator));
 		actions.put("ShowTitles", new ShowTitles(operator));
 		actions.put("Reset", new Reset(operator));
 		return actions;
 		
+	}
+	
+	
+	public Map<String, DefaultAction> getHandledActions() {
+		return handledActions;
+	}
+
+	public void setHandledActions(Map<String, DefaultAction> handledActions) {
+		this.handledActions = handledActions;
+	}
+
+	public void setRunning(boolean running)
+	{
+		this.running = running;
 	}
 }

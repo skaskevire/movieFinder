@@ -7,22 +7,18 @@ import java.util.Scanner;
 
 import com.epam.movieFinder.action.converter.Converter;
 import com.epam.movieFinder.action.converter.StringToMovieConverter;
-import com.epam.movieFinder.action.validator.MovieStringValidator;
-import com.epam.movieFinder.action.validator.Validator;
-import com.epam.movieFinder.cache.MovieStorageStackedStateCache;
 import com.epam.movieFinder.internalException.InternalException;
 import com.epam.movieFinder.storage.Movie;
 import com.epam.movieFinder.storage.MovieStorage;
 
 public class ExtractMovies extends DefaultAction {
-	private final Converter<String[], Movie> stringToMovieConverter;
-	private final Validator<String[]> movieStringValidator;
-	private static final String LINE_SPLITTING_PATTERN = ",";
 
-	public ExtractMovies(MovieStorageStackedStateCache storage) {
-		super(storage);
+
+	private final Converter<String, Movie> stringToMovieConverter;
+
+	public ExtractMovies(MovieStorage movieStorage) {
+		super(movieStorage);
 		stringToMovieConverter = new StringToMovieConverter();
-		movieStringValidator = new MovieStringValidator();
 	}
 
 	@Override
@@ -35,26 +31,24 @@ public class ExtractMovies extends DefaultAction {
 		try {
 
 			Scanner sc = new Scanner(file);
-			MovieStorage ms = new MovieStorage();
 			int count = 0;
 			while (sc.hasNextLine()) {
-				String line = sc.nextLine();
-				String[] ideoms = line.substring(1, line.length() - 1).split(LINE_SPLITTING_PATTERN);
+				Movie movie = stringToMovieConverter.convert(sc.nextLine());
 
-				if (( !line.startsWith("(") || !line.endsWith(")") ) || !movieStringValidator.validate(ideoms)) {
-					System.out.println("Can't parse this line, Skipping. Line: " + count+1);
+				if (movie != null) {
+					
+					movieStorage.addInfo(movie);
+					count++;
+				} else {
+					System.out.println("Can't parse this line, Skipping. Line: " + count + 1);
 					continue;
 				}
-				ms.addInfo(stringToMovieConverter.convert(ideoms));
-				count++;
 			}
 			sc.close();
 
-			storage.pushMovieStorageStateSnapshot(ms);
 			System.out.println("Number of scanned movies: " + count);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
-
 }
