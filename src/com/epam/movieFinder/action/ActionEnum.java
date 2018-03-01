@@ -1,8 +1,15 @@
 package com.epam.movieFinder.action;
 
 public enum ActionEnum {
-	EXTRACT_MOVIES("extract"), FILTER_BY_RATING_BETTER_THAN("FilterByRatingBetterThan"), FILTER_BY_YEAR_OF_PRODUCTION(
-			"FilterByYearOfProduction"), FILTER_BY_RATING_COUNT_MORE_THAN("FilterByRatingCountMoreThan"), EXIT("exit"), ShowMovieCount("ShowMovieCount"), ShowTitles("ShowTitles"), Reset("Reset");
+	EXTRACT_MOVIES("extract"),
+	FILTER_BY_RATING_BETTER_THAN("FilterByRatingBetterThan"),
+	FILTER_BY_YEAR_OF_PRODUCTION("FilterByYearOfProduction"),
+	FILTER_BY_RATING_COUNT_MORE_THAN("FilterByRatingCountMoreThan"),
+	SHOW_MOVIE_COUNT("ShowMovieCount"),
+	SHOW_TITLES("ShowTitles"),
+	RESET("Reset"),
+	EXIT("exit");
+
 	String name;
 
 	ActionEnum(String name) {

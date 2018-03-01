@@ -11,6 +11,10 @@ import com.epam.movieFinder.invoker.Invoker;
 
 public class InvokerImpl implements Invoker {
 	private Map<String, DefaultAction> handledActions;
+	@Override
+	public Map<String, DefaultAction> getHandledActions() {
+		return handledActions;
+	}
 
 	public InvokerImpl(Map<String, DefaultAction> handledActions) {
 		this.handledActions = handledActions;

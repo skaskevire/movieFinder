@@ -24,7 +24,20 @@ public class ExtractMovies extends DefaultAction {
 	@Override
 	public void execute(List<String> args) throws InternalException {
 
-		File file = new File(args.get(0));
+		File file = null;
+		if(args.size() == 1)
+		{
+			file = new File(args.get(0));
+		}
+		else
+		{
+			StringBuilder sb = new StringBuilder();
+			for(String arg : args)
+			{
+				sb.append(arg).append(" ");
+			}
+			file = new File(sb.toString());
+		}
 		if (!file.exists()) {
 			throw new InternalException("Specified wrong path to file or wrong filename");
 		}
