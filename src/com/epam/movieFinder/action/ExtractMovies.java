@@ -13,7 +13,6 @@ import com.epam.movieFinder.storage.MovieStorage;
 
 public class ExtractMovies extends DefaultAction {
 
-
 	private final Converter<String, Movie> stringToMovieConverter;
 
 	public ExtractMovies(MovieStorage movieStorage) {
@@ -23,21 +22,7 @@ public class ExtractMovies extends DefaultAction {
 
 	@Override
 	public void execute(List<String> args) throws InternalException {
-
-		File file = null;
-		if(args.size() == 1)
-		{
-			file = new File(args.get(0));
-		}
-		else
-		{
-			StringBuilder sb = new StringBuilder();
-			for(String arg : args)
-			{
-				sb.append(arg).append(" ");
-			}
-			file = new File(sb.toString());
-		}
+		File file = openFile(args);
 		if (!file.exists()) {
 			throw new InternalException("Specified wrong path to file or wrong filename");
 		}
@@ -49,7 +34,6 @@ public class ExtractMovies extends DefaultAction {
 				Movie movie = stringToMovieConverter.convert(sc.nextLine());
 
 				if (movie != null) {
-					
 					movieStorage.addInfo(movie);
 					count++;
 				} else {
@@ -61,7 +45,22 @@ public class ExtractMovies extends DefaultAction {
 
 			System.out.println("Number of scanned movies: " + count);
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			throw new InternalException("Specified wrong path to file or wrong filename");
 		}
+	}
+
+	private File openFile(List<String> path) {
+		File file = null;
+		if (path.size() == 1) {
+			file = new File(path.get(0));
+		} else {
+			StringBuilder sb = new StringBuilder();
+			for (String arg : path) {
+				sb.append(arg).append(" ");
+			}
+			file = new File(sb.toString());
+		}
+
+		return file;
 	}
 }
