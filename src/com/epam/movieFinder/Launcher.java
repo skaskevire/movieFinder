@@ -5,6 +5,13 @@ import java.util.Scanner;
 import com.epam.movieFinder.invoker.Invoker;
 import com.epam.movieFinder.util.ActionParser;
 
+/**
+ * Contains main loop of application. 
+ * During this loop all commands read from console input in format:
+ * command_name argument1 argument2 ... argumentN
+ * 
+ * @author Raman_Skaskevich@epam.com
+ */
 public class Launcher {
 	private boolean running;
 	private Invoker invoker;

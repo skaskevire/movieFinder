@@ -1,5 +1,11 @@
 package com.epam.movieFinder.action;
 
+
+/**
+ * Command names recognizable by application
+ * 
+ * @author Raman_Skaskevich@epam.com
+ */
 public enum ActionEnum {
 	EXTRACT_MOVIES("extract"),
 	FILTER_BY_RATING_BETTER_THAN("FilterByRatingBetterThan"),

@@ -1,5 +1,10 @@
 package com.epam.movieFinder.storage;
 
+/**
+ * Movie data object
+ * 
+ * @author Raman_Skaskevich@epam.com
+ */
 public class Movie {
 	private String name;
 	private Integer dateOfIssue;

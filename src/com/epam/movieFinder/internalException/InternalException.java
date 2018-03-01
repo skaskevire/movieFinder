@@ -3,7 +3,7 @@ package com.epam.movieFinder.internalException;
 /**
  * Internal Exception
  * 
- * @author Raman_Skaskevich
+ * @author Raman_Skaskevich@epam.com
  */
 public class InternalException extends Exception{
 

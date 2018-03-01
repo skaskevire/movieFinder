@@ -5,6 +5,11 @@ import java.util.List;
 import com.epam.movieFinder.internalException.InternalException;
 import com.epam.movieFinder.storage.MovieStorage;
 
+/**
+ * Implementation of {@DefaultAction} Filter movies with rating count better arg
+ * 
+ * @author Raman_Skaskevich@epam.com
+ */
 public class FilterByRatingCountMoreThan extends DefaultAction {
 
 	public FilterByRatingCountMoreThan(MovieStorage movieStorage) {
@@ -16,8 +21,9 @@ public class FilterByRatingCountMoreThan extends DefaultAction {
 		if (args.size() != 1) {
 			throw new InternalException("Wrong arg size");
 		}
-
+		validateIntegerArgument(args.get(0));
 		movieStorage.applyFilter(movie -> Integer.valueOf(args.get(0)) < movie.getVal());
+
 	}
 
 }

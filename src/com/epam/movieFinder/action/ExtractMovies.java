@@ -11,6 +11,12 @@ import com.epam.movieFinder.internalException.InternalException;
 import com.epam.movieFinder.storage.Movie;
 import com.epam.movieFinder.storage.MovieStorage;
 
+/**
+ * Implementation of {@DefaultAction}
+ * Extracts all movies from file
+ * 
+ * @author Raman_Skaskevich@epam.com
+ */
 public class ExtractMovies extends DefaultAction {
 
 	private final Converter<String, Movie> stringToMovieConverter;
@@ -21,8 +27,8 @@ public class ExtractMovies extends DefaultAction {
 	}
 
 	@Override
-	public void execute(List<String> args) throws InternalException {
-		File file = openFile(args);
+	public void execute(List<String> filePath) throws InternalException {
+		File file = openFile(filePath);
 		if (!file.exists()) {
 			throw new InternalException("Specified wrong path to file or wrong filename");
 		}

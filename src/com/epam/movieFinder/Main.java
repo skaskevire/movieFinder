@@ -16,6 +16,11 @@ import com.epam.movieFinder.invoker.Invoker;
 import com.epam.movieFinder.invoker.impl.InvokerImpl;
 import com.epam.movieFinder.storage.MovieStorage;
 
+/**
+ * Application entry point.
+ * 
+ * @author Raman_Skaskevich@epam.com
+ */
 public class Main {
 	public static void main(String[] args) {
 		if(args.length == 0)

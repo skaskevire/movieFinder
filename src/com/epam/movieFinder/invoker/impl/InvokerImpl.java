@@ -9,6 +9,11 @@ import com.epam.movieFinder.action.DefaultAction;
 import com.epam.movieFinder.internalException.InternalException;
 import com.epam.movieFinder.invoker.Invoker;
 
+/**
+ * Implementation of {@Invoker}
+ * 
+ * @author Raman_Skaskevich@epam.com
+ */
 public class InvokerImpl implements Invoker {
 	private Map<String, DefaultAction> handledActions;
 	@Override

@@ -6,6 +6,12 @@ import com.epam.movieFinder.internalException.InternalException;
 import com.epam.movieFinder.storage.Movie;
 import com.epam.movieFinder.storage.MovieStorage;
 
+/**
+ * Implementation of {@DefaultAction}
+ * Shows all titles of movies with / without applied filters
+ * 
+ * @author Raman_Skaskevich@epam.com
+ */
 public class ShowTitles extends DefaultAction {
 
 	public ShowTitles(MovieStorage movieStorage) {

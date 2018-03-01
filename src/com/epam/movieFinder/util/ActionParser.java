@@ -7,6 +7,11 @@ import java.util.stream.IntStream;
 import com.epam.movieFinder.Command;
 import com.epam.movieFinder.action.ActionEnum;
 
+/**
+ * Parses user input into {@Command} object
+ * 
+ * @author Raman_Skaskevich@epam.com
+ */
 public class ActionParser {
 	private static final String IDEOM_DELIMETERS = " ";
 	

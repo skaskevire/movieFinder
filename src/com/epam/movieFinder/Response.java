@@ -1,5 +1,12 @@
 package com.epam.movieFinder;
 
+
+/**
+ * Respone of performed action.
+ *  contains information about system exceptions
+ * 
+ * @author Raman_Skaskevich@epam.com
+ */
 public class Response {
 	private final String message;
 	private final boolean containsError;

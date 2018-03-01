@@ -6,6 +6,13 @@ import com.epam.movieFinder.Launcher;
 import com.epam.movieFinder.internalException.InternalException;
 import com.epam.movieFinder.storage.MovieStorage;
 
+
+/**
+ * Implementation of {@DefaultAction}
+ * Exit from application
+ * 
+ * @author Raman_Skaskevich@epam.com
+ */
 public class Exit extends DefaultAction {
 	private Launcher launcher;
 	public Exit(MovieStorage movieStorage, Launcher launcher) {
