@@ -16,6 +16,9 @@ import com.epam.movieFinder.invoker.Invoker;
 import com.epam.movieFinder.invoker.impl.InvokerImpl;
 import com.epam.movieFinder.storage.MovieStorage;
 
+import static com.epam.movieFinder.action.ActionEnum.*;
+import static com.epam.movieFinder.util.Messages.*;
+
 /**
  * Application entry point.
  * 
@@ -25,7 +28,7 @@ public class Main {
 	public static void main(String[] args) {
 		if(args.length == 0)
 		{
-			System.out.println("You must specify path to file with movies");
+			System.out.println(MSG_MUST_SPECIFY_PATH_TO_FILE);
 			return;
 		}
 		MovieStorage storage = new MovieStorage();
@@ -40,14 +43,14 @@ public class Main {
 	private static Map<String, DefaultAction> initSystemActions(MovieStorage operator, Launcher launcher)
 	{
 		Map<String, DefaultAction> actions = new HashMap<>();
-		actions.put("extract", new ExtractMovies(operator));
-		actions.put("FilterByRatingBetterThan", new FilterByRatingBetterThan(operator));
-		actions.put("FilterByYearOfProduction", new FilterByYearOfProduction(operator));
-		actions.put("FilterByRatingCountMoreThan", new FilterByRatingCountMoreThan(operator));
-		actions.put("ShowMovieCount", new ShowMovieCount(operator));
-		actions.put("ShowTitles", new ShowTitles(operator));
-		actions.put("Reset", new Reset(operator));
-		actions.put("exit", new Exit(operator, launcher));
+		actions.put(EXTRACT_MOVIES.getName(), new ExtractMovies(operator));
+		actions.put(FILTER_BY_RATING_BETTER_THAN.getName(), new FilterByRatingBetterThan(operator));
+		actions.put(FILTER_BY_YEAR_OF_PRODUCTION.getName(), new FilterByYearOfProduction(operator));
+		actions.put(FILTER_BY_RATING_COUNT_MORE_THAN.getName(), new FilterByRatingCountMoreThan(operator));
+		actions.put(SHOW_MOVIE_COUNT.getName(), new ShowMovieCount(operator));
+		actions.put(SHOW_TITLES.getName(), new ShowTitles(operator));
+		actions.put(RESET.getName(), new Reset(operator));
+		actions.put(EXIT.getName(), new Exit(operator, launcher));
 		return actions;		
 	}
 }

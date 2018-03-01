@@ -5,6 +5,7 @@ import java.util.List;
 import com.epam.movieFinder.internalException.InternalException;
 import com.epam.movieFinder.storage.MovieStorage;
 
+import static com.epam.movieFinder.util.Messages.*;
 
 /**
  * Abstract action, contains movie storage.
@@ -26,7 +27,7 @@ public abstract class DefaultAction{
 		try {
 			Double.valueOf(argument);
 		} catch (NumberFormatException e) {
-			throw new InternalException("Wrong argument format");
+			throw new InternalException(EX_WRONG_ARGUMENT_FORMAT);
 		}
 	}
 	
@@ -35,7 +36,7 @@ public abstract class DefaultAction{
 		try {
 			Integer.valueOf(argument);
 		} catch (NumberFormatException e) {
-			throw new InternalException("Wrong argument format");
+			throw new InternalException(EX_WRONG_ARGUMENT_FORMAT);
 		}
 	}
 }

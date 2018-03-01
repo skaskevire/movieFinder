@@ -9,6 +9,8 @@ import com.epam.movieFinder.action.DefaultAction;
 import com.epam.movieFinder.internalException.InternalException;
 import com.epam.movieFinder.invoker.Invoker;
 
+import static com.epam.movieFinder.util.Messages.*;
+
 /**
  * Implementation of {@Invoker}
  * 
@@ -29,7 +31,7 @@ public class InvokerImpl implements Invoker {
 		try {
 			if(action == null)
 			{
-				throw new InternalException("Unknown command");
+				throw new InternalException(EX_UNKNOWN_COMMAND);
 			}
 			handledActions.get(action.getName()).execute(args);
 			return new Response(null, false, null);

@@ -11,6 +11,8 @@ import com.epam.movieFinder.internalException.InternalException;
 import com.epam.movieFinder.storage.Movie;
 import com.epam.movieFinder.storage.MovieStorage;
 
+import static com.epam.movieFinder.util.Messages.*;
+
 /**
  * Implementation of {@DefaultAction}
  * Extracts all movies from file
@@ -30,7 +32,7 @@ public class ExtractMovies extends DefaultAction {
 	public void execute(List<String> filePath) throws InternalException {
 		File file = openFile(filePath);
 		if (!file.exists()) {
-			throw new InternalException("Specified wrong path to file or wrong filename");
+			throw new InternalException(EX_WRONG_PATH_SPECIFIED);
 		}
 		try {
 
@@ -43,7 +45,7 @@ public class ExtractMovies extends DefaultAction {
 					movieStorage.addInfo(movie);
 					count++;
 				} else {
-					System.out.println("Can't parse this line, Skipping. Line: " + count + 1);
+					System.out.println(String.format(MSG_PARSE_FAILED, count + 1));
 					continue;
 				}
 			}
@@ -51,7 +53,7 @@ public class ExtractMovies extends DefaultAction {
 
 			System.out.println("Number of scanned movies: " + count);
 		} catch (FileNotFoundException e) {
-			throw new InternalException("Specified wrong path to file or wrong filename");
+			throw new InternalException(EX_WRONG_PATH_SPECIFIED);
 		}
 	}
 
